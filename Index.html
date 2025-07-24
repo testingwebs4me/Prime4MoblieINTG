@@ -754,40 +754,42 @@
         </div>
     </section>
 
-    <script>
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            
-            mobileMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
+   <script>
+document.addEventListener('DOMContentLoaded', function () {
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        
+        mobileMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+    }
+
+    function closeMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        
+        mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+    }
+
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', toggleMobileMenu);
+
+    document.addEventListener('click', function(event) {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const navContainer = document.querySelector('.nav-container');
+        
+        if (!navContainer.contains(event.target) && mobileMenu.classList.contains('active')) {
+            closeMobileMenu();
         }
+    });
 
-        function closeMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            
-            mobileMenu.classList.remove('active');
-            menuToggle.classList.remove('active');
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
         }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const navContainer = document.querySelector('.nav-container');
-            
-            if (!navContainer.contains(event.target) && mobileMenu.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
-
-        // Close mobile menu on window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                closeMobileMenu();
-            }
-        });
-    </script>
+    });
+});
+</script>
 </body>
 </html>
